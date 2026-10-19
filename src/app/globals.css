@@ -1,0 +1,18 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+body { @apply bg-fond text-texte font-texte antialiased; overflow-x: clip; }
+.drapeau { height: 4px; background: linear-gradient(90deg, #fc3d32 33%, #fff 33% 66%, #007e3a 66%); }
+.champ { @apply w-full rounded-lg border border-bord bg-fond px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange; }
+.bouton { @apply rounded-lg bg-orange px-4 py-2 text-sm font-bold text-black hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-jaune; }
+
+/* Bandeau d'accueil : dépose ta photo dans public/hero.jpg, sinon le dégradé est utilisé */
+.hero { background-color: #0b0b14;
+  background-image: linear-gradient(90deg, rgba(11,11,20,.92) 0%, rgba(11,11,20,.65) 45%, rgba(11,11,20,.15) 100%), url('/hero.jpg'),
+    radial-gradient(ellipse at 80% 20%, rgba(255,138,31,.55), transparent 55%), radial-gradient(ellipse at 20% 100%, rgba(168,85,247,.45), transparent 60%), linear-gradient(180deg, #1a1030, #0b0b14);
+  background-size: cover; background-position: center; }
+.hero-champ { @apply min-w-0 flex-1 bg-transparent px-3 py-3 text-sm text-black placeholder:text-gray-500 focus:outline-none; }
+.bouton-jaune { @apply flex items-center gap-2 rounded-lg bg-jaune px-5 py-3 text-sm font-bold text-black hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-orange; }
+
+/* Cartes : léger relief au survol, comme sur l'accueil */
+li > a, .carte-lien { transition: transform .15s ease; }
+ul.grid > li { transition: transform .15s ease, box-shadow .15s ease; }
+ul.grid > li:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.45); }
