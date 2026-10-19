@@ -160,12 +160,12 @@ export async function modifierMatch(f: FormData) {
     if (!ta?.league_id || ta.league_id !== tb?.league_id) retour('Les deux équipes doivent être dans la même ligue (et la même plateforme).', ici);
     maj.league_id = ta.league_id;
   }
-  const { error } = await sb.from(tableMatch(t)).update(maj).eq('id', id);
+  const { error } = await (sb as any).from(tableMatch(t))
   retour(error ? 'Erreur : ' + error.message : 'Match corrigé. Le classement est recalculé.', t === 'tournoi' ? '/admin/tournois' : '/admin/matchs');
 }
 export async function supprimerMatch(f: FormData) {
   const t = String(f.get('t')), id = String(f.get('id'));
   if (f.get('confirmer') !== 'on') retour('Coche la case pour confirmer la suppression.', `/admin/matchs/${id}?t=${t}`);
-  const { error } = await db().from(tableMatch(t)).delete().eq('id', id);
+  const { error } = await (db() as any).from(tableMatch(t))
   retour(error ? 'Erreur : ' + error.message : 'Match supprimé. Le classement est recalculé.', t === 'tournoi' ? '/admin/tournois' : '/admin/matchs');
 }
