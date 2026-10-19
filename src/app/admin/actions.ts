@@ -5,7 +5,7 @@ import { db } from '@/lib/supabase';
 import { envoyerPhoto } from '@/lib/photo';
 const num = (v: FormDataEntryValue | null) => v === null || v === '' ? null : Number(v);
 const scoreOk = (v: number | null) => v === null || (Number.isInteger(v) && v >= 0);
-const fin = (msg: string) => { revalidatePath('/', 'layout'); redirect('/admin?msg=' + encodeURIComponent(msg)); };
+const fin = function fin(msg: string): never { revalidatePath('/', 'layout'); redirect('/admin?msg=' + encodeURIComponent(msg)); }
 
 export async function saisirResultat(f: FormData) {
   const sb = db(); const a = String(f.get('a')), b = String(f.get('b'));
@@ -42,7 +42,7 @@ export async function finDeSaison(f: FormData) {
 }
 export async function deconnexion() { await db().auth.signOut(); redirect('/admin/login'); }
 
-const retour = (msg: string, to = '/admin/joueurs') => { revalidatePath('/', 'layout'); redirect(`${to}?msg=${encodeURIComponent(msg)}`); };
+const retour =function retour(msg: string, to = '/admin/joueurs'): never { revalidatePath('/', 'layout'); redirect(`${to}?msg=${encodeURIComponent(msg)}`); }
 
 export async function modifierJoueur(f: FormData) {
   const sb = db(); const id = String(f.get('id')); const name = String(f.get('nom')).trim();
